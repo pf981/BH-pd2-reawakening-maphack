@@ -4,7 +4,7 @@
 #include "../../Config.h"
 #include "../../Drawing.h"
 
-struct LevelList {
+/* struct LevelList {
 	unsigned int levelId;
 	unsigned int x, y, act;
 };
@@ -12,7 +12,7 @@ struct LevelList {
 struct BaseSkill {
 	WORD Skill;
 	BYTE Level;
-};
+}; */
 
 class MapNotify : public Module {
 private:

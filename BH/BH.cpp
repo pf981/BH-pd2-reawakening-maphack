@@ -20,6 +20,8 @@ bool BH::cGuardLoaded;
 WNDPROC BH::OldWNDPROC;
 BHApp App;
 
+map<string, Toggle>* BH::MiscToggles;
+
 Patch* patches[] = {
 	new Patch(Call, D2CLIENT, { 0x44230, 0x45280 }, (int)GameLoop_Interception, 7),
 
@@ -102,15 +104,19 @@ void BH::Initialize()
 	new Gamefilter();
 	new Bnet();
 	new Item();
+	new AutoTele();
 	new Party();
 	new ItemMover();
 	new StashExport();
+	new Maphack();
 	new MapNotify();
 	new ChatColor();
 
 	moduleManager->LoadModules();
 
 	statsDisplay = new Drawing::StatsDisplay("Stats");
+
+	MiscToggles = ((AutoTele*)moduleManager->Get("autotele"))->GetToggles();
 
 	// Injection would occasionally deadlock (I only ever saw it when using Tabbed Diablo
 	// but theoretically it could happen during regular injection):
